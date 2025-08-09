@@ -18,6 +18,7 @@
                     <th>حالة الطلبية</th>
                     <th>تاريخ الإضافة</th>
                     <th>تعديل الحالة</th>
+                    <th>عرض الطلبية</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,6 +68,11 @@
                                 <button type="submit" class="btn btn-primary btn-sm">حفظ</button>
                             </form>
                         </td>
+                        <td>
+    <a href="{{ route('healthUnitOrders.show', $huOrder->id) }}" class="btn btn-info btn-sm" title="عرض">
+        <i class="bi bi-eye"></i> عرض
+    </a>
+</td>
                     </tr>
                 @empty
                     <tr>

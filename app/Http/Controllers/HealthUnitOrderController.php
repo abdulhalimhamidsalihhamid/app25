@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\HealthUnitOrder;
+use App\Models\Order;
 
 class HealthUnitOrderController extends Controller
 {
@@ -13,6 +14,11 @@ class HealthUnitOrderController extends Controller
         $healthUnitOrders = HealthUnitOrder::with(['user', 'order'])->latest()->get();
         return view('health_units.index', compact('healthUnitOrders'));
     }
+    public function show($id)
+{
+     $order = Order::with(['orderItems.item'])->findOrFail($id);
+    return view('healthUnitOrders.show', compact('order'));
+}
 
     public function updateStatus(Request $request, $id)
 {
@@ -56,5 +62,21 @@ public function warehouseStats()
     ));
 }
 
+public function expiredItems()
+{
+    $expiredItems = \App\Models\ItemInfo::with('item')
+        ->where('expire_date', '<', now())
+        ->get();
+
+    return view('health_units.expired', compact('expiredItems'));
+}
+public function nearExpiredItems()
+{
+    $nearExpiredItems = \App\Models\ItemInfo::with('item')
+        ->whereBetween('expire_date', [now(), now()->addDays(30)])
+        ->get();
+
+    return view('health_units.near_expired', compact('nearExpiredItems'));
+}
 
 }

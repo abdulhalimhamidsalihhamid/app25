@@ -11,7 +11,7 @@ use App\Http\Controllers\SubProductController;
 use App\Http\Controllers\HealthUnitOrderController;
 
 
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', function () { return redirect()->route('login'); });
 
 Auth::routes();
 
@@ -28,6 +28,7 @@ Route::resource('items', ItemController::class);
 Route::resource('iteminfos', ItemInfoController::class);
 
 Route::resource('healthUnitOrders', HealthUnitOrderController::class);
+Route::get('healthUnitOrders/{id}', [HealthUnitOrderController::class, 'show'])->name('healthUnitOrders.show');
 
 Route::post('orders/{order}/send', [OrderController::class, 'sendOrder'])->name('orders.send');
 
@@ -46,5 +47,9 @@ Route::put('/profile', [ProfileController::class, 'update'])->name('profile.upda
 Route::middleware(['auth'])->group(function () {
     Route::resource('orders', OrderController::class);
 });
+Route::get('/expired-items', [\App\Http\Controllers\HealthUnitOrderController::class, 'expiredItems'])
+    ->name('expired.items');
+Route::get('/near-expired-items', [\App\Http\Controllers\HealthUnitOrderController::class, 'nearExpiredItems'])
+    ->name('near.expired.items');
 
 

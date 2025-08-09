@@ -41,23 +41,32 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card shadow text-center border-danger">
-                <div class="card-body">
-                    <h5 class="card-title text-danger mb-3"><i class="bi bi-x-circle"></i> منتهية الصلاحية</h5>
-                    <h2>{{ $expiredItems }}</h2>
-                </div>
+             <div class="col-md-4">
+    <a href="{{ route('expired.items') }}" class="text-decoration-none">
+        <div class="card shadow text-center border-danger" style="cursor:pointer;">
+            <div class="card-body">
+                <h5 class="card-title text-danger mb-3">
+                    <i class="bi bi-x-circle"></i> منتهية الصلاحية
+                </h5>
+                <h2>{{ $expiredItems }}</h2>
             </div>
         </div>
+    </a>
+</div>
 
         <div class="col-md-4">
-            <div class="card shadow text-center border-warning">
-                <div class="card-body">
-                    <h5 class="card-title text-warning mb-3"><i class="bi bi-alarm"></i> ستنتهي خلال 30 يوم</h5>
-                    <h2>{{ $nearExpiredItems }}</h2>
-                </div>
+    <a href="{{ route('near.expired.items') }}" class="text-decoration-none">
+        <div class="card shadow text-center border-warning" style="cursor:pointer;">
+            <div class="card-body">
+                <h5 class="card-title text-warning mb-3">
+                    <i class="bi bi-alarm"></i> ستنتهي خلال 30 يوم
+                </h5>
+                <h2>{{ $nearExpiredItems }}</h2>
             </div>
         </div>
+    </a>
+</div>
+لهف
 
     </div>
 </div>
